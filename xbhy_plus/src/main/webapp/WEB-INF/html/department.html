@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/static/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="/static/css/font.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <title>部门</title>
+
+</head>
+<body>
+<header class="header">
+
+</header>
+
+<div class="d-flex align-items-stretch">
+    <!-- Sidebar Navigation-->
+    <nav id="sidebar" class="sidebar">
+
+    </nav>
+    <!-- Sidebar Navigation end-->
+    <div class="page-content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">全部部门</h2>
+            </div>
+        </div>
+        <section class="no-padding-bottom">
+
+            <div class="list-group subject" >
+                <div class="list-group-item" v-for="d in dept">
+                    <a :href="'deptDetail?id='+d.id" data-toggle="collapse">{{d.name}} &nbsp;{{d.count}}人</a>
+                    <div :id="'deptDetail?id='+d.id" class="collapse deptDetail">
+                        <ul>
+                            <li>
+                                <a href="#">小东</a>
+                            </li>
+                            <li>
+                                <a href="#">小方</a>
+                            </li>
+                            <li>
+                                <a href="#">小标</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
+                <div class="container-fluid text-center">
+                    <p class="no-margin-bottom">Copyright &copy; 2019.Company <a href="#" >东方标准</a> </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- JavaScript files-->
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/popper.js/umd/popper.min.js"> </script>
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="/static/vendor/chart.js/Chart.min.js"></script>
+<script src="/static/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="/static/js/charts-home.js"></script>
+<script src="/static/js/front.js"></script>
+<script src="/static/js/custom.js"></script>
+<script src="/static/bootstrap/js/bootstrap-collapse.js"></script>
+
+<script type="text/javascript" src="/static/layer/layer.js"></script>
+<script type="text/javascript" src="/static/vue/vue.js"></script>
+<script type="text/javascript" src="/static/vue/axios.js"></script>
+<script src="/static/js/dept/dept.js"></script>
+</body>
+<script>
+    $(function () {
+        $(".header").load("/common/header");
+        $(".sidebar").load("/common/sidebar");
+    })
+
+
+</script>
+</html>

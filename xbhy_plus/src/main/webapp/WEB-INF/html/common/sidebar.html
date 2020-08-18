@@ -1,0 +1,50 @@
+<div class="sideXie">
+    <!-- Sidebar Header-->
+    <div class="sidebar-header d-flex align-items-center">
+        <div id="avatar" class="avatar"><img src="/static/img/avatar-6.jpg" alt="..." class="img-fluid rounded-circle">
+        </div>
+        <div class="title">
+            <h1 class="h5">{{user.username}}</h1>
+            <p>{{user.deptName}}</p>
+        </div>
+    </div>
+    <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+    <ul class="list-unstyled">
+        <li class="active"><a href="/login/toHome"> <i class="icon-home"></i>主页 </a></li>
+        <li><a href="#userDropdown" data-toggle="collapse"> <i class="icon-windows"></i>用户列表</a>
+            <ul id="userDropdown" class="collapse list-unstyled ">
+                <li><a href="/user/toUser">查看用户</a></li>
+                <li><a href="/user/toUserFocus">我关注的用户</a></li>
+                <li><a href="/article/toArticle">发布文章</a></li>
+                <li><a href="/favorite/toCollect">我的收藏</a></li>
+            </ul>
+        </li>
+        <!--<li><a href="login.html"> <i class="icon-logout"></i>Login page </a></li>-->
+
+        <li><a href="#depDropdown" data-toggle="collapse"> <i class="icon-windows2"></i>部门列表</a>
+            <ul id="depDropdown" class="collapse list-unstyled ">
+                <li><a href="/dept/toDept">全部部门</a></li>
+                <li><a href="meeting.html">会议系统</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+<script>
+    var sideVm = new Vue({
+        el: '.sideXie',
+        data: {
+            user: {}
+        },
+        methods: {
+            userMsg: function () {
+                if (localStorage.getItem("loginUser") != undefined && localStorage.getItem("loginUser") != null) {
+                    this.user = JSON.parse(localStorage.getItem("loginUser"));
+                }
+            },
+        }, created: function () {
+            this.userMsg();
+        }
+    })
+</script>

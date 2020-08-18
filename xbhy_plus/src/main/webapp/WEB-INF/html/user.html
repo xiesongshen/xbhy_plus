@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/static/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="/static/css/font.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <link rel="stylesheet" href="/static/layer/theme/default/layer.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-switch.min.css">
+    <title>查看用户</title>
+</head>
+<body>
+<header class="header">
+
+</header>
+
+<div class="d-flex align-items-stretch">
+    <!-- Sidebar Navigation-->
+    <nav id="sidebar" class="sidebar">
+
+
+    </nav>
+    <!-- Sidebar Navigation end-->
+    <div class="page-content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">用户列表</h2>
+            </div>
+        </div>
+        <section class="no-padding-bottom">
+            <div class="title">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="inlineFormInput" class="sr-only">Name</label>
+                        <input id="inlineFormInput" v-model="name" type="text" placeholder="按名字查找"
+                               class="mr-sm-3 form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" @click="_selectPage(1,pageInfo.pageSize)" value="查询"
+                               class="btn btn-primary">
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>简介</th>
+                        <th>操作</th>
+                        <th>加关注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="u in pageInfo.list">
+                        <th scope="row">{{u.id}}</th>
+                        <td>{{u.username}}</td>
+                        <td>
+                            <span v-if="u.gender==1">男</span>
+                            <span v-else-if="u.gender==0">女</span>
+                        </td>
+                        <td>{{u.age}}</td>
+                        <td>{{u.desc}}</td>
+                        <td>
+                            <input type="submit" value="详细信息" @click="toDetail(u)"
+                                   class="btn-xs btn-primary userDetail">
+                        </td>
+
+                        <td>
+
+                            <input  type="checkbox" value="" @click="addFocus(u.id)" :checked="u.flag?true:false" class="checkbox-template">
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <nav class="text-center" aria-label="Page navigation">
+                    <input style="float: left;margin-top: 1%" type="button" @click="selectAll" value="查询全部"
+                           class="btn btn-info">
+                    <ul class="pagination">
+                        <li v-if="pageInfo.hasPreviousPage">
+                            <a aria-label="Previous" href="javascript:void(0);"
+                               @click="_selectPage(pageInfo.prePage,pageInfo.pageSize)">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li v-else>
+                            <a href="javascript:void(0);" aria-label="Previous" class="disabled">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+
+                        <li v-for="i in pageInfo.navigatepageNums">
+                            <a href="javascript:void(0);"
+                               @click="_selectPage(i,pageInfo.pageSize)">
+                                {{i}}
+                            </a>
+                        </li>
+
+                        <li v-if="pageInfo.hasNextPage">
+                            <a href="javascript:void(0);" aria-label="Next"
+                               @click="_selectPage(pageInfo.nextPage,pageInfo.pageSize)">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li v-else>
+                            <a href="javascript:void(0);" aria-label="Next" class="disabled">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer__block block no-margin-bottom">
+                <div class="container-fluid text-center">
+                    <p class="no-margin-bottom">Copyright &copy; 2019.Company <a href="#">东方标准</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- JavaScript files-->
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/popper.js/umd/popper.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap-switch.min.js"></script>
+<script src="/static/vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="/static/vendor/chart.js/Chart.min.js"></script>
+<script src="/static/js/layer.js"></script>
+<script src="/static/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="/static/js/charts-home.js"></script>
+<script src="/static/js/front.js"></script>
+<script src="/static/js/custom.js"></script>
+
+<script type="text/javascript" src="/static/layer/layer.js"></script>
+<script type="text/javascript" src="/static/vue/vue.js"></script>
+<script type="text/javascript" src="/static/vue/axios.js"></script>
+<script src="/static/js/user/user.js"></script>
+</body>
+<script>
+    $(function () {
+        $(".header").load("/common/header");
+        $(".sidebar").load("/common/sidebar");
+    })
+
+
+</script>
+</html>
