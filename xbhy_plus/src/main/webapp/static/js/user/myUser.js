@@ -12,26 +12,47 @@ var vm = new Vue({
             if (localStorage.getItem("loginUser") != undefined && localStorage.getItem("loginUser") != null) {
                 this.user = JSON.parse(localStorage.getItem("loginUser"));
             }
-        },
-        selectFocus: function () {
             axios({
                 url: `/user/selectFocus/${this.pageInfo.pageNum}/${this.pageInfo.pageSize}`,
                 params: {id: this.user.id}
             }).then(response => {
-                console.log(response.data.obj)
+                /*  console.log(response.data.obj)*/
                 this.pageInfo = response.data.obj
             }).catch(error => {
                 layer.msg(error.message);
             })
         },
+
+        _selectPage: function (pageNum, pageSize) {
+            this.pageInfo.pageNum = pageNum;
+            this.pageInfo.pageSize = pageSize;
+            this.userMsg();
+        },
+
         toDetail: function (user) {
-            layer.obj = user;
-            layer.open({
-                type: 2,
-                area: ['60%', '80%'],
-                fixed: false, //不固定
-                content: '/user/toDetail',
-            })
+            if (user.isSecret == 1) {
+                layer.msg("该用户设置不可见")
+            } else {
+                axios({
+                    url: '/user/addLook',
+                    data: user,
+                    method: 'put'
+                }).then(response => {
+                    layer.obj = response.data.obj[0];
+                    layer.open({
+                        type: 2,
+                        area: ['60%', '80%'],
+                        fixed: false, //不固定
+                        content: '/user/toDetail',
+                        end: () => {
+                            this.userMsg();
+                        }
+                    })
+                }).catch(error => {
+                    layer.msg(error.message);
+                });
+
+            }
         },
         delFocus: function (id) {
             layer.msg('取消关注？', {
@@ -44,9 +65,9 @@ var vm = new Vue({
                     }).then(response => {
                         if (response.data.success) {
                             layer.close(index);
-                            this.selectFocus();
+                            this.userMsg();
                             layer.msg(response.data.msg);
-                        }else {
+                        } else {
                             layer.msg(response.data.msg);
                         }
                     }).catch(error => {
@@ -57,6 +78,5 @@ var vm = new Vue({
         }
     }, created: function () {
         this.userMsg();
-        this.selectFocus();
     }
 })

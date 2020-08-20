@@ -45,4 +45,9 @@ public class UserFocusController {
         userfocus.setUserId(uid);
         return new Result(true,"查询成功",service.select(userfocus));
     }
+
+    @RequestMapping("selectFocusCount")
+    public Result selectFocusCount(Integer id){
+        return new Result(true,"成功",service.selectUserfocusCount(id));
+    }
 }

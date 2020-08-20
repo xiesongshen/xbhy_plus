@@ -38,17 +38,11 @@
 
             <div class="list-group subject" >
                 <div class="list-group-item" v-for="d in dept">
-                    <a :href="'deptDetail?id='+d.id" data-toggle="collapse">{{d.name}} &nbsp;{{d.count}}人</a>
-                    <div :id="'deptDetail?id='+d.id" class="collapse deptDetail">
+                    <a @click="selectPer(d.id)" :href="'javascript:deptDetail'+d.id">{{d.name}} &nbsp;{{d.count}}人</a>
+                    <div :id="'deptDetail'+d.id" :class="!d.flag?'collapse ':'deptDetail in collapse show'">
                         <ul>
-                            <li>
-                                <a href="#">小东</a>
-                            </li>
-                            <li>
-                                <a href="#">小方</a>
-                            </li>
-                            <li>
-                                <a href="#">小标</a>
+                            <li v-for=" u in deptPer" >
+                                <a href="javascript:void(0)" @click="toDetail(u)">{{u.realName}}</a>
                             </li>
                         </ul>
                     </div>
@@ -88,7 +82,6 @@
         $(".header").load("/common/header");
         $(".sidebar").load("/common/sidebar");
     })
-
 
 </script>
 </html>

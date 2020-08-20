@@ -23,6 +23,17 @@ public class Dept {
     @Transient
     private Integer count;
 
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+    @Transient
+    private Boolean flag;
+
     @Override
     public String toString() {
         return "Dept{" +

@@ -21,4 +21,8 @@ public interface UserService extends BaseService<User>{
     List<User> addLook(User user);
 
     List<User> selectFocus(Integer id);
+
+    List<User> selectFocusByid(Integer id);
+
+    List<User> selectMyUserSc(Integer aid, Integer uid);
 }

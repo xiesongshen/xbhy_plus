@@ -82,7 +82,7 @@
 
                         <td>
 
-                            <input  type="checkbox" value="" @click="addFocus(u.id)" :checked="u.flag?true:false" class="checkbox-template">
+                            <input  type="checkbox" value="" @click="addFocus(u.id,$event)" :checked="u.flag?true:false" class="checkbox-template">
 
                         </td>
                     </tr>
@@ -91,8 +91,6 @@
                 </table>
 
                 <nav class="text-center" aria-label="Page navigation">
-                    <input style="float: left;margin-top: 1%" type="button" @click="selectAll" value="查询全部"
-                           class="btn btn-info">
                     <ul class="pagination">
                         <li v-if="pageInfo.hasPreviousPage">
                             <a aria-label="Previous" href="javascript:void(0);"

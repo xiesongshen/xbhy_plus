@@ -55,13 +55,9 @@
             <div class="myList">
                 <p>您关注的小伙伴等人也收藏了该文章</p>
                 <ul>
-                    <li class="list-group-item">
-                        <a href="#">小东</a>
+                    <li class="list-group-item"  v-for="ou in OtherScUser">
+                        <a href="javascript:void(0)" @click="toDetail(ou)">{{ou.realName}}</a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="#">小标</a>
-                    </li>
-
                 </ul>
             </div>
         </section>

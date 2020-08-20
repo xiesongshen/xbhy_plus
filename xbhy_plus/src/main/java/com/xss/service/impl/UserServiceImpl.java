@@ -73,4 +73,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     public List<User> selectFocus(Integer id){
         return userMapper.selectFocus(id);
     }
+
+
+    @Override
+    public List<User> selectFocusByid(Integer id){
+        return userMapper.selectFocusByid(id);
+    }
+
+    @Override
+    public List<User> selectMyUserSc( Integer aid, Integer uid){
+        return userMapper.selectMyUserSc(aid,uid);
+    }
 }

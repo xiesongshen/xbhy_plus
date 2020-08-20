@@ -1,5 +1,9 @@
 package com.xss.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xss.entity.Dept;
 import com.xss.entity.Dept;
 import com.xss.entity.Userfocus;
 import com.xss.mapper.DeptMapper;
@@ -28,4 +32,5 @@ public class DeptServiceImpl extends BaseServiceImpl<Dept> implements DeptServic
     public List<Dept> selectCount(){
         return deptMapper.selectDeptCount();
     }
+    
 }

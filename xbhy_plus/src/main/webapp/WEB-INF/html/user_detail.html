@@ -42,7 +42,7 @@
                     <!--</div>-->
                     <div class="title">
                         <br>
-                        <p class="h5"><strong>粉丝数：</strong><span>&nbsp;</span><span>&nbsp;</span><span>1001</span></p>
+                        <p class="h5"><strong>粉丝数：</strong><span>&nbsp;</span><span>&nbsp;</span><span>{{focusCount}}</span></p>
                         <br>
                         <p class="h5"><strong>被看数：</strong><span>&nbsp;</span><span>&nbsp;</span><span>{{user.look}}</span></p>
                         <br>
@@ -122,12 +122,11 @@
                                 <label class="col-sm-3 form-control-label">是否私密 <br><small class="text-primary">默认为否，可以不设置</small></label>
                                 <div class="col-sm-9">
                                     <div class="i-checks">
-                                        <input  disabled v-model="user.isSecret" :checked="user.isSecret==1?true:false" id="checkboxCustom1" type="checkbox" value="" class="checkbox-template">
+                                        <input disabled true-value="1" false-value="0" v-model="user.isSecret" id="checkboxCustom1" type="checkbox"  class="checkbox-template">
                                         <label for="checkboxCustom1">是否私密</label>
                                     </div>
 
                                 </div>
-
 
                             </div>
                             <div class="line"></div>

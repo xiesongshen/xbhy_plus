@@ -7,7 +7,6 @@ var vm = new Vue({
         },
         name: '',
         uid: '',
-        flag: false,
     },
     methods: {
         selectPage: function () {
@@ -25,10 +24,8 @@ var vm = new Vue({
                     params: {id: this.uid}
                 }).then(response => {
                     let list = this.pageInfo.list;
-                    console.log(list)
 
                     let obj = response.data.obj;
-                    console.log(obj)
 
                     for (let j = 0; j < obj.length; j++) {
                         const objElement = obj[j];
@@ -36,13 +33,11 @@ var vm = new Vue({
                             const listElement = list[i];
                             if (listElement.id == objElement.id) {
                                 listElement.flag = true;
-                            } else {
-                                listElement.flag = false;
                             }
-                            this.flag = listElement.flag;
                         }
                     }
 
+                    console.log(list);
 
                 }).catch(error => {
                     layer.msg(error.message);
@@ -56,10 +51,6 @@ var vm = new Vue({
             this.pageInfo.pageNum = pageNum;
             this.pageInfo.pageSize = pageSize;
             this.selectPage();
-        },
-        selectAll: function () {
-            this.name = '';
-            this._selectPage(1, this.pageInfo.pageSize)
         },
         toDetail: function (user) {
             if (user.isSecret == 1) {
@@ -87,23 +78,28 @@ var vm = new Vue({
 
             }
         },
-        addFocus: function (id) {
+        addFocus: function (id, event) {
             if (localStorage.getItem("loginUser") != undefined && localStorage.getItem("loginUser") != null) {
                 this.uid = JSON.parse(localStorage.getItem("loginUser")).id;
             }
             this.userFocusId = id;
 
-            if (this.flag == false) {
-                axios({
-                    url: '/userFocus/addFocus',
-                    params: {uid: this.uid, userFocusId: this.userFocusId}
-                }).then(response => {
-                    layer.msg(response.data.msg);
+            if (event.path[0].checked) {
+                if (this.uid == this.userFocusId) {
+                    layer.msg("不可以关注自己噢")
+                    event.path[0].checked = false;
+                } else {
+                    axios({
+                        url: '/userFocus/addFocus',
+                        params: {uid: this.uid, userFocusId: this.userFocusId}
+                    }).then(response => {
+                        layer.msg(response.data.msg);
 
-                }).catch(error => {
-                    layer.msg(error.message);
-                })
-            } else{
+                    }).catch(error => {
+                        layer.msg(error.message);
+                    })
+                }
+            } else {
                 axios({
                     url: '/userFocus/delFocus',
                     params: {uid: this.uid, userFocusId: this.userFocusId}

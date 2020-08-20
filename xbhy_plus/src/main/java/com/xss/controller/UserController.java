@@ -70,4 +70,22 @@ public class UserController {
     public Result selectF(Integer id){
         return new Result(true,"成功",service.selectFocus(id));
     }
+
+
+    @RequestMapping("selectUserByDid")
+    public Result selectUserByDid(Integer id){
+        User user = new User();
+        user.setDeptId(id);
+        return new Result(true,"查询成功",service.select(user));
+    }
+
+    @RequestMapping("selectFocusByid")
+    public Result selectFocusByid(Integer id){
+        return new Result(true,"成功",service.selectFocusByid(id));
+    }
+
+    @RequestMapping("selectMyUserSc")
+    public Result selectMyUserSc(Integer aid ,Integer uid){
+        return new Result(true,"成功",service.selectMyUserSc(aid,uid));
+    }
 }

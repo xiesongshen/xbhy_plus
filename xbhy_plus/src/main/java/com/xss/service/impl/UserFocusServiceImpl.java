@@ -24,4 +24,11 @@ import java.util.List;
 @Transactional
 public class UserFocusServiceImpl extends BaseServiceImpl<Userfocus> implements UserFocusService {
 
+    @Autowired
+    UserFocusMapper userFocusMapper;
+
+    @Override
+    public Userfocus selectUserfocusCount(Integer id){
+        return userFocusMapper.selectUserfocusCount(id);
+    }
 }

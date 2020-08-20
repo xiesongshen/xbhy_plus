@@ -8,4 +8,5 @@ import com.xss.entity.Userfocus;
  * @desc
  */
 public interface UserFocusService extends BaseService<Userfocus>{
+    Userfocus selectUserfocusCount(Integer id);
 }

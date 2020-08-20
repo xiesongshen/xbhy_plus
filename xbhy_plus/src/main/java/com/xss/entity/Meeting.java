@@ -1,8 +1,11 @@
 package com.xss.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 @Table(name = "meeting")
@@ -32,22 +35,55 @@ public class Meeting {
      */
     private String content;
 
+    @Transient
+    private Date startNoTime;
+
+    @Override
+    public String toString() {
+        return "Meeting{" +
+                "id=" + id +
+                ", deptName='" + deptName + '\'' +
+                ", deptId=" + deptId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", publishDate=" + publishDate +
+                ", deptN='" + deptN + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", status=" + status +
+                ", makeUser='" + makeUser + '\'' +
+                '}';
+    }
+
     /**
      * 发布时间
      */
     @Column(name = "publish_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishDate;
 
+    public String getDeptN() {
+        return deptN;
+    }
+
+    public void setDeptN(String deptN) {
+        this.deptN = deptN;
+    }
+
+    @Transient
+    private String deptN;
     /**
      * 开始时间
      */
     @Column(name = "start_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /**
      * 结束时间
      */
     @Column(name = "end_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /**

@@ -56,4 +56,6 @@ public class SpringMybatis {
 
         return sqlSessionFactoryBean;
     }
+
+
 }

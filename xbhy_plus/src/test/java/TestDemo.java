@@ -1,10 +1,7 @@
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageInfo;
 import com.xss.config.SpringMybatis;
-import com.xss.entity.Article;
-import com.xss.entity.Dept;
-import com.xss.entity.User;
-import com.xss.entity.Userfocus;
+import com.xss.entity.*;
 import com.xss.mapper.*;
 import com.xss.service.ArticleService;
 import com.xss.service.FavoriteService;
@@ -31,10 +28,10 @@ public class TestDemo {
     DruidDataSource dataSource;
 
     @Autowired
-    UserMapper mapper;
+    MeetingMapper mapper;
 
     @Autowired
-    ArticleService service;
+    UserService service;
 
     @Test
     public void testDataSource() throws SQLException {
@@ -43,18 +40,21 @@ public class TestDemo {
 
     @Test
     public void testMapper(){
-        List<User> users = mapper.selectFocus(1);
-        for (User user : users) {
-            System.out.println(user);
+        Meeting meeting = new Meeting();
+        meeting.setStatus(1);
+        List<Meeting> list = mapper.meetingList(meeting);
+        for (Meeting meeting1 : list) {
+            System.out.println(meeting1);
         }
-
     }
 
     @Test
     public void testService(){
-        List<Article> articles = service.selectScSArticles();
-        for (Article article : articles) {
-            System.out.println(article);
+        User user = new User();
+        user.setId(1);
+        List<User> select = service.select(user);
+        for (User user1 : select) {
+            System.out.println(user1);
         }
     }
 }

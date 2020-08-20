@@ -4,7 +4,10 @@ var vm = new Vue({
         article: {},
         action: true,
         id: '',
-        ScCount: ''
+        ScCount: '',
+        LoginUid:'',
+        userFocus:{},
+        OtherScUser:{}
     },
     methods: {
         changeSC: function () {
@@ -63,7 +66,8 @@ var vm = new Vue({
 
             }).catch(error => {
                 layer.msg(error.message)
-            })
+            });
+            this.selectFocusByid();
         },
         selectScSArticlesByAid: function () {
             axios({
@@ -78,6 +82,58 @@ var vm = new Vue({
             }).catch(error => {
                 layer.msg(error.message);
             })
+        },
+        selectFocusByid: function () {
+            if (localStorage.getItem("loginUser") != undefined && localStorage.getItem("loginUser") != null) {
+                this.LoginUid = JSON.parse(localStorage.getItem("loginUser")).id;
+            }
+            axios({
+                url: '/user/selectFocusByid',
+                data: {id: this.LoginUid}
+            }).then(response => {
+                /*console.log(response)*/
+                this.userFocus = response.data.obj;
+            }).catch(error => {
+                layer.msg(error.message)
+            });
+            this.selectMyUserSc();
+        },
+        selectMyUserSc:function () {
+            axios({
+                url:'/user/selectMyUserSc',
+                params:{aid:this.article.id,uid:this.LoginUid}
+            }).then(response=>{
+                this.OtherScUser = response.data.obj;
+            }).catch(error=>{
+                layer.msg(error.message);
+            })
+        },
+        toDetail:function (ou) {
+            if (ou.isSecret == 1) {
+                layer.msg("该用户设置不可见")
+            } else {
+                axios({
+                    url: '/user/addLook',
+                    data: ou,
+                    method: 'put'
+                }).then(response => {
+                    layer.obj = response.data.obj[0];
+                    /*console.log(response.data.obj[0])*/
+                    layer.open({
+                        type: 2,
+                        area: ['60%', '80%'],
+                        fixed: false, //不固定
+                        content: '/user/toDetail',
+                        end: () => {
+                            this.selectSC();
+                            ou.look = response.data.obj[0].look;
+                        }
+                    })
+                }).catch(error => {
+                    layer.msg(error.message);
+                });
+
+            }
         }
     },
     created: function () {

@@ -40,7 +40,7 @@
             <div class="list-group myList">
                 <ul v-for="user in pageInfo.list">
                     <li class="list-group-item">
-                        <a @click="toDetail(user)">{{user.realName}}</a>
+                        <a href="javascript:void(0);"  @click="toDetail(user)">{{user.realName}}</a>
                         <div style="float: right" class="text-right">
                             <input type="button" @click="delFocus(user.id)" class="btn btn-danger" value="取消关注">
                         </div>

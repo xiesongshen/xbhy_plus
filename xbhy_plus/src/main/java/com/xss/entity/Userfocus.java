@@ -3,6 +3,7 @@ package com.xss.entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Table(name = "userfocus")
 public class Userfocus {
@@ -19,6 +20,18 @@ public class Userfocus {
     @Id
     @Column(name = "user_focus_id")
     private Integer userFocusId;
+
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    @Transient
+    private Integer count;
 
     /**
      * 获取用户id
