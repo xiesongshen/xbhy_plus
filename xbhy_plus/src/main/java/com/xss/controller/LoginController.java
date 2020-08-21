@@ -68,8 +68,13 @@ public class LoginController {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("LoginUserCookie".equals(cookie.getName())) {
-                    User loginUser = (User) session.getAttribute("loginUser");
-                    return new Result(true, "登陆成功", loginUser);
+                    String value = cookie.getValue();
+
+                    //将cookie中的值给进session中
+                    value = URLDecoder.decode(value, "utf-8");
+                    User LoginOne = om.readValue(value, User.class);
+                    session.setAttribute("loginUser", LoginOne);
+                    return new Result(true, "登陆成功", LoginOne);
                 }
             }
         }

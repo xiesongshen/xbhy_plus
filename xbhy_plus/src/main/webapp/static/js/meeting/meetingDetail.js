@@ -47,14 +47,16 @@ var vm = new Vue({
                             layer.msg('你确定退出么？', {
                                 time: 0 //不自动关闭
                                 , btn: ['是的', '取消']
-                                , yes: function (index) {
+                                , yes:  (index)=> {
+                                 /*   console.log(this)*/
                                     layer.close(index);
                                     axios({
                                         url: '/meetingJoin/delJoinMeeting',
                                         params: {mid: this.meeting.id, uid: this.loginId}
                                     }).then(response => {
                                         this.meeting.flag = true;
-                                        layer.msg("您已退出")
+                                        layer.msg(response.data.msg);
+                                        this.selectMeetingNum();
                                     })
                                 }
                             });

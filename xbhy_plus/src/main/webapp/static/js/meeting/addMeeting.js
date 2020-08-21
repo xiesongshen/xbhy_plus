@@ -75,15 +75,9 @@ var vm = new Vue({
 $("#endTime").change(function () {
     if ($(this).val() < ($("#startTime").val())) {
         $(this).val("");
-        layer.msg("结束时间不允许大于开始时间")
+        layer.msg("开始时间不允许大于结束时间")
     } else if (($("#startTime").val().length == 0)) {
         layer.msg("请输入开始时间")
-    }
-});
-$("#startTime").change(function () {
-    if ($(this).val() < ($("#endTime").val())) {
-        $(this).val("");
-        layer.msg("结束时间不允许大于开始时间")
     }
 });
 $("#endTime").blur(function () {
