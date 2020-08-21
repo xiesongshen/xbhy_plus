@@ -41,16 +41,14 @@
 
             <div class="myTitle">
                 <h3 class="text-center">{{meeting.title}}</h3>
-                <input type="submit" value="取消会议" class="btn btn-danger">
-                <input type="submit" value="参加会议" class="btn btn-info">
-
+                <input type="button" @click="changeMeetingJoin" :value="meeting.flag?'参加会议':'取消会议'" class="btn" :class="meeting.flag?'btn-info':'btn-danger'">
             </div>
 
             <div class="myContent">
                 <p class="h6"><strong>部门：</strong>{{meeting.deptN}}</p>
-                <p class="h6"><strong>应到：</strong>10<span>人</span></p>
-                <p class="h6"><strong>实到：</strong>9<span>人</span></p>
-                <p class="h6"><strong>未到：</strong>1<span>人</span></p>
+                <p class="h6"><strong>应到：</strong>{{shouldJoin.length}}<span>人</span></p>
+                <p class="h6"><strong>实到：</strong>{{realJoin}}<span>人</span></p>
+                <p class="h6"><strong>未到：</strong>{{shouldJoin.length-realJoin}}<span>人</span></p>
                 <textarea style="padding: 2px" disabled="disabled" class="form-control" rows="11">
                     {{meeting.content}}
                 </textarea>

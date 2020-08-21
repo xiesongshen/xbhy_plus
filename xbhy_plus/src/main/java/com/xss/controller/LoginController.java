@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 
 /**
  * @author XSS
@@ -36,7 +37,7 @@ public class LoginController {
     @Autowired
     HttpServletRequest req;
 
-    @RequestMapping("")
+    @RequestMapping("login")
     @ResponseBody
     public Result toLogin(String username, String password, String code, Boolean remember, @SessionAttribute("checkCode") String checkCode, HttpSession session, HttpServletResponse resp) throws JsonProcessingException, UnsupportedEncodingException {
         ObjectMapper om = new ObjectMapper();
@@ -54,6 +55,10 @@ public class LoginController {
                     cookie.setPath("/");
                     resp.addCookie(cookie);
                 }
+
+                one.setLoginTime(new Date());
+                service.updateByPrimaryKeySelective(one);
+
                 one.setPassword(null);
                 session.setAttribute("loginUser", one);
                 return new Result(true, "登陆成功", one);

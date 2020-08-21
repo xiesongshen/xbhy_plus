@@ -59,11 +59,11 @@
                                 <div class="title">
                                     <strong>新增文章</strong>
                                 </div>
-                                <div class="number dashtext-3">140</div>
+                                <div class="number dashtext-3">{{articleCount}}</div>
                             </div>
                             <div class="progress progress-template">
                                 <!--这个百分比由前端计算,取接近100%的数,例如 140就是接近200于是为40%-->
-                                <div role="progressbar" style="width: 40%" aria-valuenow="55" aria-valuemin="0"
+                                <div role="progressbar" style="width: 40%" :aria-valuenow="articleCount" aria-valuemin="0"
                                      aria-valuemax="100" class="progress-bar progress-bar-template dashbg-3"></div>
                             </div>
                         </div>
@@ -74,11 +74,11 @@
                                 <div class="title">
                                     <strong>新开会议</strong>
                                 </div>
-                                <div class="number dashtext-6">8</div>
+                                <div class="number dashtext-6">{{meetingCount}}</div>
                             </div>
                             <div class="progress progress-template">
                                 <!--这个百分比由前端计算,取接近100%的数,例如 140就是接近200于是为40%-->
-                                <div role="progressbar" style="width: 40%" aria-valuenow="55" aria-valuemin="0"
+                                <div role="progressbar" style="width: 40%" :aria-valuenow="meetingCount" aria-valuemin="0"
                                      aria-valuemax="100" class="progress-bar progress-bar-template dashbg-5"></div>
                             </div>
                         </div>
@@ -130,20 +130,34 @@
     })
 
     var vm = new Vue({
-        el:'.page-content',
-        data:{
-            userCount:''
+        el: '.page-content',
+        data: {
+            userCount: '',
+            articleCount: '',
+            meetingCount:''
         },
-        methods:{
-            selectCount:function () {
+        methods: {
+            selectCount: function () {
                 axios({
-                    url:'/user/count',
-                }).then(response=>{
+                    url: '/user/count',
+                }).then(response => {
                     this.userCount = response.data.obj;
+                });
+
+                axios({
+                    url: '/article/count'
+                }).then(response => {
+                    this.articleCount = response.data.obj
+                })
+
+                axios({
+                    url: '/meeting/count'
+                }).then(response => {
+                    this.meetingCount = response.data.obj
                 })
             }
         },
-        created:function () {
+        created: function () {
             this.selectCount();
         }
     })

@@ -1,6 +1,7 @@
 package com.xss.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -38,6 +39,9 @@ public class Meeting {
     @Transient
     private Date startNoTime;
 
+    @Transient
+    private Boolean flag;
+
     @Override
     public String toString() {
         return "Meeting{" +
@@ -46,6 +50,8 @@ public class Meeting {
                 ", deptId=" + deptId +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
+                ", startNoTime=" + startNoTime +
+                ", flag=" + flag +
                 ", publishDate=" + publishDate +
                 ", deptN='" + deptN + '\'' +
                 ", startTime=" + startTime +
@@ -62,6 +68,30 @@ public class Meeting {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishDate;
 
+    public Date getStartNoTime() {
+        return startNoTime;
+    }
+
+    public void setStartNoTime(Date startNoTime) {
+        this.startNoTime = startNoTime;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+    public String[] getJoinUser() {
+        return joinUser;
+    }
+
+    public void setJoinUser(String[] joinUser) {
+        this.joinUser = joinUser;
+    }
+
     public String getDeptN() {
         return deptN;
     }
@@ -71,19 +101,24 @@ public class Meeting {
     }
 
     @Transient
+    private String[] joinUser;
+
+    @Transient
     private String deptN;
     /**
      * 开始时间
      */
     @Column(name = "start_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "CTT")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /**
      * 结束时间
      */
     @Column(name = "end_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "CTT")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /**

@@ -82,5 +82,9 @@ public class ArticleController {
         return new Result(true,"成功",article);
     }
 
+    @RequestMapping("count")
+    public Result count(){
+        return new Result(true,"查询成功",service.selectCount(null));
+    }
 
 }

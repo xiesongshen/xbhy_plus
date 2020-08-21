@@ -30,6 +30,7 @@ var vm = new Vue({
 
         toDetail: function (meeting) {
             meeting.startNoTime = meeting.startTime.split(" ")[0];
+            meeting.flag = true;
             layer.obj = meeting;
             layer.open({
                 type: 2,
@@ -41,9 +42,9 @@ var vm = new Vue({
         toInsert: function () {
             layer.open({
                 type: 2,
-                area: ['60%', '50%'],
+                area: ['60%', '70%'],
                 fixed: false, //不固定
-                content: '/article/toInsert',
+                content: '/meeting/toInsert',
                 end: () => {
                     /*console.log(layer.success);*/
                     if (layer.success == undefined || !layer.success) {

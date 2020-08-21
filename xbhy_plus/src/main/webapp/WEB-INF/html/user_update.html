@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="/static/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="/static/css/font.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/static/css/custom.css">
+    <title>用户详情</title>
+
+</head>
+<body>
+
+
+<div class="d-flex align-items-stretch">
+    <!-- Sidebar Navigation end-->
+    <div class="page-content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">用户详情</h2>
+            </div>
+        </div>
+        <section class="no-padding-bottom">
+            <!-- Form Elements -->
+            <div class="col-lg-12">
+                <div class="block">
+                    <div class="title"><strong>TA的头像</strong></div>
+                    <div class="avatar"><img src="/static/img/avatar-6.jpg" alt="加载中..." style="width: 150px;height: 150px" class="img-thumbnail rounded-circle"></div>
+                    <!--<div style="margin-top: 15px" class="text-left">-->
+                        <!--&lt;!&ndash; 用于展示上传文件名的表单 &ndash;&gt;-->
+                        <!--<input id="showname" onclick="makeThisfile()" type="button" class="btn btn-primary" value="更换头像">-->
+                        <!--&lt;!&ndash; 真正的文件上传表单 &ndash;&gt;-->
+                        <!--<input name="realFile" type="file" id="myFile" style="display: none" />-->
+                    <!--</div>-->
+                    <div class="title">
+                        <br>
+                        <p class="h5"><strong>粉丝数：</strong><span>&nbsp;</span><span>&nbsp;</span><span>{{focusCount}}</span></p>
+                        <br>
+                        <p class="h5"><strong>被看数：</strong><span>&nbsp;</span><span>&nbsp;</span><span>{{user.look}}</span></p>
+                        <br>
+                    </div>
+                    <div class="title"><strong>TA的数据</strong></div>
+                    <div class="block-body">
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">真实姓名</label>
+                                <div class="col-sm-9">
+                                    <input v-model="user.realName"  type="text" value="东方标准" class="form-control">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">所属部门</label>
+                                <div class="col-sm-9">
+                                    <select v-model="user.deptId" class="form-control" >
+                                        <option value="1">研发部</option>
+                                        <option value="2">推广部</option>
+                                        <option value="3">行政部</option>
+                                        <option value="4">财务部</option>
+                                        <option value="5">总裁办公室</option>
+                                        <option value="7">秘书部</option>
+                                        <option value="8">市场部</option>
+                                        <option value="9">宣传部</option>
+                                        <option value="10">销售部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">电话</label>
+                                <div class="col-sm-9">
+                                    <input v-model="user.phone"  type="text" value="020-xxxxxxxx" name="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">年龄</label>
+                                <div class="col-sm-9">
+                                    <input v-model="user.age"  type="text" placeholder="20" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">性别 </label>
+                                <div class="col-sm-9">
+
+                                    <div class="i-checks">
+                                        <input  :checked="user.gender==1?true:false" v-model="user.gender"  id="radioCustom1" type="radio"  value="1" name="sex" class="radio-template">
+                                        <label for="radioCustom1">男</label>
+                                        <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+                                        <input  :checked="user.gender==0?true:false" v-model="user.gender"  id="radioCustom2" type="radio" value="0" name="sex" class="radio-template">
+                                        <label for="radioCustom2">女</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">注册时间</label>
+                                <div class="col-sm-9">
+                                    <input disabled v-model="user.registerTime" type="text"  placeholder="2019-10-30 09:30:00" class="form-control">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">登录时间</label>
+                                <div class="col-sm-9">
+                                    <input disabled v-model="user.loginTime" type="text"  placeholder="2019-10-30 19:30:00" class="form-control">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 form-control-label">是否私密 <br><small class="text-primary">默认为否，可以不设置</small></label>
+                                <div class="col-sm-9">
+                                    <div class="i-checks">
+                                        <input  true-value="1" false-value="0" v-model="user.isSecret" id="checkboxCustom1" type="checkbox"  class="checkbox-template">
+                                        <label for="checkboxCustom1">是否私密</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="line"></div>
+                            <div class="text-center">
+                                <input type="button" @click="doUpdate" class="btn btn-primary" value="保存">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<!-- JavaScript files-->
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/popper.js/umd/popper.min.js"> </script>
+<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="/static/vendor/chart.js/Chart.min.js"></script>
+<script src="/static/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="/static/js/charts-home.js"></script>
+<script src="/static/js/front.js"></script>
+<script src="/static/js/custom.js"></script>
+
+<script type="text/javascript" src="/static/layer/layer.js"></script>
+<script type="text/javascript" src="/static/vue/vue.js"></script>
+<script type="text/javascript" src="/static/vue/axios.js"></script>
+<script src="/static/js/user/userUpdate.js"></script>
+</body>
+
+</body>
+</html>

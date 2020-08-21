@@ -88,4 +88,17 @@ public class UserController {
     public Result selectMyUserSc(Integer aid ,Integer uid){
         return new Result(true,"成功",service.selectMyUserSc(aid,uid));
     }
+
+    @RequestMapping("toUpdate")
+    public ModelAndView toUpdate(){
+        return new ModelAndView("user_update");
+    }
+
+    @RequestMapping("doUpdate")
+    public Result doUpdate(@RequestBody User user){
+        service.updateByPrimaryKeySelective(user);
+        User u = new User();
+        u.setId(user.getId());
+        return new Result(true,"成功",service.selectOne(u));
+    }
 }

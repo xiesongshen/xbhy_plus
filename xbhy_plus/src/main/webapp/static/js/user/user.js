@@ -94,7 +94,6 @@ var vm = new Vue({
                         params: {uid: this.uid, userFocusId: this.userFocusId}
                     }).then(response => {
                         layer.msg(response.data.msg);
-
                     }).catch(error => {
                         layer.msg(error.message);
                     })

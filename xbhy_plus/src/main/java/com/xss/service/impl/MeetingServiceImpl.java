@@ -73,4 +73,9 @@ public class MeetingServiceImpl extends BaseServiceImpl<Meeting> implements Meet
         }
     }
 
+    @Override
+    public List<Meeting> selectShouldJoin(Integer mid){
+        return meetingMapper.selectShouldJoin(mid);
+    }
+
 }

@@ -24,7 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         System.out.println(uri);
 
-        if (uri.endsWith("/")) {
+        if (uri.endsWith("/toHome")) {
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {

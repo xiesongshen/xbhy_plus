@@ -31,7 +31,7 @@ public class TestDemo {
     MeetingMapper mapper;
 
     @Autowired
-    UserService service;
+    ArticleService service;
 
     @Test
     public void testDataSource() throws SQLException {
@@ -50,11 +50,7 @@ public class TestDemo {
 
     @Test
     public void testService(){
-        User user = new User();
-        user.setId(1);
-        List<User> select = service.select(user);
-        for (User user1 : select) {
-            System.out.println(user1);
-        }
+        int i = service.selectCount(new Article());
+        System.out.println(i);
     }
 }

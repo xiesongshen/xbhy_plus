@@ -49,7 +49,7 @@
 
                         <!--选择状态-->
                         <div class="form-group" style="margin-right: 20px;">
-                            <select name="dep" class="form-control selectpicker" id="status" v-model="meeting.status">
+                            <select  name="dep" class="form-control selectpicker" id="status" v-model="meeting.status">
                                 <option value="">请选择状态</option>
                                 <option value="0">未开始</option>
                                 <option value="1">正在进行</option>
@@ -62,7 +62,7 @@
                         </div>
                     </form>
 
-                    <input id="addMeet" type="button" value="发布会议" class="btn btn-primary">
+                    <input id="addM" type="button" @click="toInsert" value="发布会议" class="btn btn-primary">
 
 
                 </div>

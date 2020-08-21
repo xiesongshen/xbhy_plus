@@ -28,4 +28,9 @@ public class DeptController {
     public Result selectCount(){
         return new Result(true,"查询成功",service.selectCount());
     }
+
+    @RequestMapping("findAllDept")
+    public Result finAllDept(){
+        return new Result(true,"成功",service.selectAll());
+    }
 }

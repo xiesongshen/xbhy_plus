@@ -34,7 +34,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         LoginInterceptor loginInterceptor = new LoginInterceptor();
         InterceptorRegistration registration = registry.addInterceptor(loginInterceptor);//登录拦截注册处理对象
         registration.addPathPatterns("/**");//设置拦截逻辑
-        registration.excludePathPatterns("/login/","/login/loginOut");//设置放行逻辑
+        registration.excludePathPatterns("/login/login","/login/loginOut");//设置放行逻辑
 
     }
 
