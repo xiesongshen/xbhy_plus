@@ -37,8 +37,6 @@ var vm = new Vue({
                         }
                     }
 
-                    console.log(list);
-
                 }).catch(error => {
                     layer.msg(error.message);
                 })

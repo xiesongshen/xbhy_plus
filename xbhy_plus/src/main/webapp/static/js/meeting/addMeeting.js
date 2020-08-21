@@ -29,7 +29,6 @@ var vm = new Vue({
                 }).then(response => {
                     if (response.data.success) {
                         let index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.success = response.data.success;
                         parent.layer.close(index);
                         parent.layer.msg(response.data.msg)
                     } else {

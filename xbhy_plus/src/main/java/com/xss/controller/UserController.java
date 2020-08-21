@@ -33,9 +33,6 @@ public class UserController {
         return new Result(true, "查询成功", service.selectPage(pageNum, pageSize, username));
     }
 
-    /*@RequestMapping("selectUser")
-    public Result selectUser(User user){
-    }*/
 
     @RequestMapping("toDetail")
     public ModelAndView toDetail(){

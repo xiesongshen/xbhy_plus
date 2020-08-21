@@ -4,7 +4,7 @@ var vm = new Vue({
         meeting: {},
         shouldJoin: '',
         realJoin: '',
-        loginId: ''
+        loginId: '',
     },
     methods: {
         selectMeetingNum: function () {
@@ -24,7 +24,7 @@ var vm = new Vue({
                 this.loginId = JSON.parse(localStorage.getItem("loginUser")).id;
             }
             let indexOf = this.shouldJoin.indexOf(this.loginId + "");
-
+            this.meeting.flag = true;
             if (indexOf == -1) {
                 layer.msg("吖屎啦内，不要你")
             } else {
@@ -42,6 +42,7 @@ var vm = new Vue({
                                 params: {mid: this.meeting.id, uid: this.loginId}
                             }).then(response => {
                                 this.meeting.flag = false;
+                                parent.layer.flag = false;
                             })
                         } else {
                             layer.msg('你确定退出么？', {
@@ -55,13 +56,12 @@ var vm = new Vue({
                                         params: {mid: this.meeting.id, uid: this.loginId}
                                     }).then(response => {
                                         this.meeting.flag = true;
+                                        parent.layer.flag = true;
                                         layer.msg(response.data.msg);
-                                        this.selectMeetingNum();
                                     })
                                 }
                             });
                         }
-                        this.selectMeetingNum();
                     }).catch(error => {
                         layer.msg(error.message);
                     })
