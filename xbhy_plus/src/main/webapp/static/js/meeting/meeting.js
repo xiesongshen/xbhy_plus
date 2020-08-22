@@ -7,7 +7,7 @@ var vm = new Vue({
         },
         meeting: {
             status: ''
-        }
+        },
     },
     methods: {
         selectPage: function () {
@@ -18,6 +18,31 @@ var vm = new Vue({
             }).then((response) => {
                 /*console.log(response.data.obj);*/
                 this.pageInfo = response.data.obj;
+
+                if (localStorage.getItem("loginUser") != undefined && localStorage.getItem("loginUser") != null) {
+                    var loginId = JSON.parse(localStorage.getItem("loginUser")).id;
+                }
+                let list = this.pageInfo.list;
+                for (const listElement of list) {
+                    let split = listElement.makeUser.slice(1, -1).split(",");
+                    let indexOf = split.indexOf(loginId + "");
+                    if (indexOf == -1) {
+                        listElement.flag = true;
+                    } else {
+                        axios({
+                            url: '/meetingJoin/shouldMeetingJoin',
+                            params: {mid: listElement.id, uid: loginId}
+                        }).then(response => {
+                            let obj = response.data.obj;
+                            if (obj == null || obj.length == 0) {
+                                listElement.flag = true;
+                            } else {
+                                listElement.flag = false;
+                            }
+                        })
+                    }
+                }
+
             }).catch((error) => {
                 layer.msg(error.message);
             })
@@ -31,6 +56,7 @@ var vm = new Vue({
         toDetail: function (meeting) {
             meeting.startNoTime = meeting.startTime.split(" ")[0];
             layer.obj = meeting;
+            console.log(this.meeting.flag);
             layer.open({
                 type: 2,
                 area: ['60%', '80%'],
@@ -38,6 +64,13 @@ var vm = new Vue({
                 content: '/meeting/toDetail',
                 end: () => {
                     this.selectPage();
+                    let list = this.pageInfo.list;
+                    console.log(list);
+                    let obj = layer.obj;
+                    console.log(obj);
+                    for (const listElement of list) {
+
+                    }
                 }
             })
         },

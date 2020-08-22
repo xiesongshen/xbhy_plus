@@ -32,7 +32,7 @@ public class MeetingJoinController {
         MeetingJoin meetingJoin = new MeetingJoin();
         meetingJoin.setuId(uid);
         meetingJoin.setcId(mid);
-        return new Result(true,"成功",service.insertSelective(meetingJoin));
+        return new Result(true,"加入会议成功",service.insertSelective(meetingJoin));
     }
 
     @RequestMapping("delJoinMeeting")
@@ -40,6 +40,6 @@ public class MeetingJoinController {
         MeetingJoin meetingJoin = new MeetingJoin();
         meetingJoin.setuId(uid);
         meetingJoin.setcId(mid);
-        return new Result(true,"成功",service.deleteByPrimaryKey(meetingJoin));
+        return new Result(true,"退出会议成功",service.deleteByPrimaryKey(meetingJoin));
     }
 }

@@ -24,12 +24,11 @@ var vm = new Vue({
                 this.loginId = JSON.parse(localStorage.getItem("loginUser")).id;
             }
             let indexOf = this.shouldJoin.indexOf(this.loginId + "");
-            this.meeting.flag = true;
             if (indexOf == -1) {
-                layer.msg("吖屎啦内，不要你")
+                layer.msg("不需要你")
             } else {
                 if (this.meeting.status == 2) {
-                    layer.msg("吖屎，已经结束了")
+                    layer.msg("已经结束了")
                 } else {
                     axios({
                         url: '/meetingJoin/shouldMeetingJoin',
@@ -42,26 +41,29 @@ var vm = new Vue({
                                 params: {mid: this.meeting.id, uid: this.loginId}
                             }).then(response => {
                                 this.meeting.flag = false;
-                                parent.layer.flag = false;
+                                layer.msg(response.data.msg);
+                                this.selectMeetingNum();
+                                parent.layer.obj = this.meeting;
                             })
                         } else {
                             layer.msg('你确定退出么？', {
                                 time: 0 //不自动关闭
                                 , btn: ['是的', '取消']
-                                , yes:  (index)=> {
-                                 /*   console.log(this)*/
+                                , yes: (index) => {
+                                    /*   console.log(this)*/
                                     layer.close(index);
                                     axios({
                                         url: '/meetingJoin/delJoinMeeting',
                                         params: {mid: this.meeting.id, uid: this.loginId}
                                     }).then(response => {
                                         this.meeting.flag = true;
-                                        parent.layer.flag = true;
+                                        this.selectMeetingNum();
                                         layer.msg(response.data.msg);
                                     })
                                 }
                             });
-                        }
+                        };
+
                     }).catch(error => {
                         layer.msg(error.message);
                     })

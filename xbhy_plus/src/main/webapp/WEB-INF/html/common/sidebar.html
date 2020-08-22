@@ -1,7 +1,7 @@
 <div class="sideXie">
     <!-- Sidebar Header-->
     <div class="sidebar-header d-flex align-items-center">
-        <div id="avatar" @click="toUpdate" class="avatar"><img src="/static/img/avatar-6.jpg" alt="..."
+        <div id="avatar" @click="toUpdate" class="avatar"><img :src="user.pic" alt="..."
                                                                class="img-fluid rounded-circle">
         </div>
         <div class="title">
@@ -45,7 +45,6 @@
                 }
             },
             toUpdate: function () {
-                debugger
                 layer.obj = this.user;
                 layer.open({
                     type: 2,
@@ -53,10 +52,11 @@
                     fixed: false, //不固定
                     content: '/user/toUpdate',
                     end: () => {
-                        debugger
                        /* this.user = response.data.obj;*/
                         this.user = layer.obj;
+                        console.log(this.user);
                         localStorage.setItem("loginUser",JSON.stringify(this.user))
+                        location.reload();
                     }
                 })
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xss.entity.Result;
 import com.xss.entity.User;
 import com.xss.service.UserService;
+import com.xss.utils.MDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,13 +45,13 @@ public class LoginController {
         Cookie[] cookies = req.getCookies();
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(MDUtil.md5(password));
 
         User one = service.selectOne(user);
         if (checkCode.equals(code)) {
             if (one != null) {
                 if (remember) {
-                    Cookie cookie = new Cookie("LoginUserCookie", URLEncoder.encode(om.writeValueAsString(user), "utf-8"));
+                    Cookie cookie = new Cookie("LoginUserCookie", URLEncoder.encode(om.writeValueAsString(one), "utf-8"));
                     cookie.setMaxAge(7 * 24 * 60 * 60);
                     cookie.setPath("/");
                     resp.addCookie(cookie);

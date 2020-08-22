@@ -40,7 +40,7 @@ var vm = new Vue({
                 }).catch(error => {
                     layer.msg(error.message);
                 })
-
+                console.log(this.pageInfo.list)
             }).catch((error) => {
                 console.log(error);
             })
@@ -51,6 +51,7 @@ var vm = new Vue({
             this.selectPage();
         },
         toDetail: function (user) {
+            console.log(user)
             if (user.isSecret == 1) {
                 layer.msg("该用户设置不可见")
             } else {

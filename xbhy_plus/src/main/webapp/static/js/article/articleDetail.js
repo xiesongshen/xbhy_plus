@@ -50,6 +50,8 @@ var vm = new Vue({
             if (localStorage.getItem("loginUser") != undefined && localStorage.getItem("loginUser") != null) {
                 this.id = JSON.parse(localStorage.getItem("loginUser")).id;
             }
+            console.log(JSON.parse(localStorage.getItem("loginUser")));
+
             axios({
                 url: '/favorite/selectAll',
                 params: {id: this.id}
