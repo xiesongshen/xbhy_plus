@@ -20,6 +20,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         Object o = session.getAttribute("loginUser");
 
+        String requestURI = request.getRequestURI();
+        System.out.println(requestURI);
+
 
         if (o == null) {
             response.sendRedirect("/index.html");

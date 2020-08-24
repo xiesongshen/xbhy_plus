@@ -74,9 +74,13 @@ public class UserController {
 
     @RequestMapping("addLook")
     public Result addLook(@RequestBody User user) {
-        Integer look = user.getLook();
-        look++;
-        user.setLook(look);
+        if (user.getLook() == null) {
+            user.setLook(1);
+        } else {
+            Integer look = user.getLook();
+            look++;
+            user.setLook(look);
+        }
         return new Result(true, "成功", service.addLook(user));
     }
 
@@ -181,32 +185,13 @@ public class UserController {
     }
 
     @RequestMapping("doInsert")
-    public Result doInsert(@RequestBody User user){
+    public Result doInsert(@RequestBody User user) {
 
         user.setPassword(MDUtil.md5(user.getPassword()));
 
 
-        return new Result(true,"注册成功",service.insertSelective(user));
+        return new Result(true, "注册成功", service.insertSelective(user));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //{"state": "SUCCESS","original": "111.jpg","size": "124147","title": "1535961757878095151.jpg","type": ".jpg","url": "/1535961757878095151.jpg"}
