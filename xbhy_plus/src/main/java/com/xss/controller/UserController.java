@@ -193,6 +193,20 @@ public class UserController {
         return new Result(true, "注册成功", service.insertSelective(user));
     }
 
+    @RequestMapping("checkEmail")
+    public Result checkEmail(String email){
+        User user = new User();
+        user.setEmail(email);
+        return new Result(true,"成功",service.selectOne(user));
+    }
+
+    @RequestMapping("checkUsername")
+    public Result checkUsername(String username){
+        User user = new User();
+        user.setUsername(username);
+        return new Result(true,"成功",service.selectOne(user));
+    }
+
 
     //{"state": "SUCCESS","original": "111.jpg","size": "124147","title": "1535961757878095151.jpg","type": ".jpg","url": "/1535961757878095151.jpg"}
     private Map<String, Object> resultMap(String state, String original, long size, String title, String type, String url) {

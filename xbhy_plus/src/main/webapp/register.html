@@ -38,12 +38,12 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="sr-only" for="form-username">Email</label>
-                        <input v-model="user.email" type="text" name="form-email" placeholder="邮箱" class="form-username form-control"
+                        <input v-model="user.email" @blur="checkEmail" type="text" name="form-email" placeholder="邮箱" class="form-username form-control"
                                id="form-email">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="form-username">Username</label>
-                        <input v-model="user.username" type="text" name="form-username" placeholder="用户名" class="form-username form-control"
+                        <input v-model="user.username" @blur="checkUsername" type="text" name="form-username" placeholder="用户名" class="form-username form-control"
                                id="form-username">
                     </div>
                     <div class="form-group">
@@ -54,7 +54,7 @@
 
                     <div class="form-group">
                         <label class="sr-only" for="form-password2">Password</label>
-                        <input v-model="passwordR" type="password" name="form-password2" placeholder="确认密码" class="form-password form-control"
+                        <input v-model="passwordR" @blur="checkPasswordR" type="password" name="form-password2" placeholder="确认密码" class="form-password form-control"
                                id="form-password2">
                     </div>
                 </div>
