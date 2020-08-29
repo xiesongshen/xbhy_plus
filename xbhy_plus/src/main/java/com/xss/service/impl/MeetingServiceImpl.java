@@ -9,7 +9,6 @@ import com.xss.entity.Meeting;
 import com.xss.enums.Sysenum;
 import com.xss.mapper.MeetingMapper;
 import com.xss.service.MeetingService;
-import com.xss.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,12 +49,11 @@ public class MeetingServiceImpl extends BaseServiceImpl<Meeting> implements Meet
     @Override
     public void updateStatusTask() {
         List<Meeting> list = meetingMapper.meetingList(new Meeting());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (Meeting meeting : list) {
             //当前时间戳
             long currentTime = new Date().getTime();
-            long startTime = DateUtil.getTimeByStr(sdf.format(meeting.getStartTime()));
-            long endTime = DateUtil.getTimeByStr(sdf.format(meeting.getEndTime()));
+            long startTime = meeting.getStartTime().getTime();
+            long endTime =meeting.getEndTime().getTime();
 
             if (startTime <= currentTime) {
                 if (endTime > currentTime) {

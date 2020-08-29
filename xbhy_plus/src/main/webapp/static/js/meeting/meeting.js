@@ -68,9 +68,6 @@ var vm = new Vue({
                     console.log(list);
                     let obj = layer.obj;
                     console.log(obj);
-                    for (const listElement of list) {
-
-                    }
                 }
             })
         },
