@@ -14,10 +14,13 @@ var vm = new Vue({
                     objElement.flag = false;
                 }
                 this.dept = obj;
+                console.log(obj)
             }).catch((error) => {
                 layer.msg(error.message);
             })
+
         },
+
         selectPer: function (id) {
             let dept = this.dept;
             for (const deptElement of dept) {
@@ -61,7 +64,8 @@ var vm = new Vue({
                 });
 
             }
-        }
+        },
+
     },
     created: function () {
         this.selectPage();

@@ -42,10 +42,12 @@ var vm = new Vue({
                         })
                     }
                 }
+                console.log("11")
 
+                setInterval(this._selectPage(this.pageInfo.pageNum,this.pageInfo.pageSize), 5000);
             }).catch((error) => {
                 layer.msg(error.message);
-            })
+            });
         },
         _selectPage: function (pageNum, pageSize) {
             this.pageInfo.pageNum = pageNum;

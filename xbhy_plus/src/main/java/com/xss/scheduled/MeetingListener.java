@@ -23,7 +23,7 @@ public class MeetingListener implements ServletContextListener {
         MeetingService meetingService = WebApplicationContextUtils.getRequiredWebApplicationContext(sce.getServletContext()).getBean(MeetingService.class);
         Timer timer = new Timer(true);
         //参数一：需要执行的任务，参数三：每隔多长时间执行一次（单位毫秒）
-        timer.schedule(new MeetingTask(meetingService), new Date(), 6 * 1000);
+        timer.schedule(new MeetingTask(meetingService), new Date(), 1 * 1000);
     }
 
     @Override
