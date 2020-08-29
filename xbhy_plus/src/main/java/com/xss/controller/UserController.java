@@ -1,7 +1,9 @@
 package com.xss.controller;
 
+import com.xss.entity.Dept;
 import com.xss.entity.Result;
 import com.xss.entity.User;
+import com.xss.service.DeptService;
 import com.xss.service.UserService;
 import com.xss.utils.EmailUtil;
 import com.xss.utils.MDUtil;
@@ -32,6 +34,9 @@ public class UserController {
 
     @Autowired
     UserService service;
+
+    @Autowired
+    DeptService deptService;
 
     @Value("${path}")
     private String path;
@@ -115,7 +120,12 @@ public class UserController {
 
     @RequestMapping("doUpdate")
     public Result doUpdate(@RequestBody User user) {
+        Dept d = new Dept();
+        d.setId(user.getDeptId());
+        user.setDeptName(deptService.selectOne(d).getName());
+
         service.updateByPrimaryKeySelective(user);
+
         User u = new User();
         u.setId(user.getId());
         return new Result(true, "成功", service.selectOne(u));
