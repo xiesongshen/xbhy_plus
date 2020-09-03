@@ -49,24 +49,15 @@
                     <!--选择部门-->
                     <div class="form-group">
 
-                        <!--<label class="form-control-label">部门：</label>
+                        <label class="form-control-label">部门：</label>
                         <select id="dept" v-model="meeting.deptId" @change="findUserByDid(meeting.deptId)" class="selectpicker" data-live-search="true" >
                             <option v-for="d in allDept" :value="d.id">{{d.name}}</option>
                         </select>
                         <label class="form-control-label">抄送人：</label>
                         <select id="joinUser" class="selectpicker" v-model="meeting.joinUser"  data-live-search="true" multiple>
                             <option  v-for=" u in deptUser" :value="u.id">{{u.realName}}</option>
-                        </select>-->
-
-
-                        <label class="form-control-label">部门：</label>
-                        <select v-model="meeting.deptId" @change="findUserByDid(meeting.deptId)" class="selectpicker dept" data-live-search="true" >
-                            <option v-for="d in allDept" :value="d.id">{{d.name}}</option>
                         </select>
-                        <label class="form-control-label">抄送人：</label>
-                        <select style="width:220px;height: 41px;position: relative;top: 13px;border-radius: 5px " v-model="meeting.joinUser"  data-live-search="true" multiple>
-                            <option  v-for=" u in deptUser" :value="u.id">{{u.realName}}</option>
-                        </select>
+
                     </div>
                     <!--开始时间-->
                     <div class="form-group">

@@ -53,16 +53,14 @@ var vm = new Vue({
                 url: '/user/selectUserByDid',
                 params: {id: id}
             }).then(response => {
-                /* console.log(response);*/
-                this.deptUser = response.data.obj;
-                console.log($(".selectpicker").selectpicker);
 
-                /*$('.joinUser').selectpicker('val', '');*/
-                $(".selectpicker").selectpicker('refresh');
-                $(".selectpicker").selectpicker('render');
-                /*$('.joinUser').selectpicker('refresh');*/
+                this.deptUser = response.data.obj;
             }).catch(error => {
                 layer.msg(error.message);
+            }).finally(res=>{
+
+                //刷新二级列表
+                $(".selectpicker").selectpicker('refresh');
             })
         }
     },
